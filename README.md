@@ -8,4 +8,4 @@ Igor Seleznev
 seleznevin2016@gmail.com
 
 
-P.S.: Welcome!
+P.S.: Welcome! :smiley:
