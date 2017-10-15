@@ -1,2 +1,11 @@
-# otus-java-2017-10
-Репозиторий для работ в рамках курса "Разработчик Java" в Otus.ru
+# Working repository for the course "Java Developer" by Otus.ru
+Group 2017-10
+
+##### Author:
+
+Igor Seleznev
+
+seleznevin2016@gmail.com
+
+
+P.S.: Welcome!
