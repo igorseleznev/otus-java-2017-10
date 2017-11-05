@@ -5,9 +5,8 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
-import java.util.RandomAccess;
 
-public class MyArrayList<E> implements List<E>, RandomAccess {
+public class MyArrayList<E> implements List<E> {
     public static final int DEFAULT_CAPACITY = 10;
     public int size = 0;
     private Object[] arr = initArr();
@@ -206,8 +205,105 @@ public class MyArrayList<E> implements List<E>, RandomAccess {
 
     @Override
     public ListIterator<E> listIterator() {
-        //TODO
-        throw new UnsupportedOperationException();
+        return new ListIterator<E>() {
+
+            private Integer current;
+
+            @Override
+            public boolean hasNext() {
+                if (size() == 0) {
+                    return false;
+                }
+                if (current == null) {
+                    return true;
+                }
+                return current < (size() - 1);
+            }
+
+            @Override
+            public E next() {
+                if (current == null) {
+                    current = 0;
+                    return (E) arr[0];
+                }
+                return (E) arr[current++];
+            }
+
+            @Override
+            public boolean hasPrevious() {
+                if (current == null) {
+                    return false;
+                }
+                if (size() == 0) {
+                    return false;
+                }
+                return true;
+            }
+
+            @Override
+            public E previous() {
+                if (current == null) {
+                    throw new IllegalStateException();
+                }
+                if (current.equals(0)) {
+                    current = null;
+                    return (E) arr[0];
+                }
+                return (E) arr[current--];
+            }
+
+            @Override
+            public int nextIndex() {
+                if (current == null) {
+                    return 0;
+                }
+                return current + 1;
+            }
+
+            @Override
+            public int previousIndex() {
+                if (current == null) {
+                    return -1;
+                }
+                return current;
+            }
+
+            @Override
+            public void remove() {
+                if (current == null) {
+                    throw new IllegalArgumentException();
+                }
+                if (size() == 0) {
+                    throw new IllegalStateException();
+                }
+                System.arraycopy(arr, current + 1, arr, current, arr.length - current - 1);
+                arr[arr.length - 1] = null;
+                current = (current == 0) ? null : current - 1;
+            }
+
+            @Override
+            public void set(E e) {
+                if (current == null) {
+                    throw new IllegalStateException();
+                }
+                arr[current] = e;
+            }
+
+            @Override
+            public void add(E e) {
+                if (current == null) {
+                    throw new IllegalArgumentException();
+                }
+                if (size() == arr.length) {
+                    // increase the size of the array
+                    Object[] newArr = new Object[arr.length*2 + 1];
+                    System.arraycopy(arr, 0, newArr, 0, arr.length);
+                    arr = newArr;
+                }
+                System.arraycopy(arr, current, arr, current + 1, arr.length - current);
+                set(e);
+            }
+        };
     }
 
     @Override
@@ -224,8 +320,6 @@ public class MyArrayList<E> implements List<E>, RandomAccess {
 
     @Override
     public String toString() {
-        return "MyArrayList{" +
-                "arr=" + Arrays.toString(arr) +
-                '}';
+        return "MyArrayList:" + Arrays.toString(Arrays.copyOfRange(arr, 0, size()));
     }
 }
