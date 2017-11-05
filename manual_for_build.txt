@@ -1,0 +1,2 @@
+Before building 'homework*' projects you need to build the parent project via
+mvn clean install
