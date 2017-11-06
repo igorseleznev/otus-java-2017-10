@@ -40,27 +40,7 @@ public class MyArrayList<E> implements List<E> {
 
     @Override
     public Iterator<E> iterator() {
-        return new Iterator<E>() {
-            private Integer currentIndex;
-
-            @Override
-            public boolean hasNext() {
-                return nextIndex() < size();
-            }
-
-            @Override
-            public E next() {
-                if (!hasNext()) {
-                    throw new IndexOutOfBoundsException();
-                }
-                currentIndex = nextIndex();
-                return (E)arr[currentIndex];
-            }
-
-            private int nextIndex() {
-                return (null == currentIndex) ? 0 : currentIndex + 1;
-            }
-        };
+        return listIterator();
     }
 
     @Override
@@ -76,8 +56,7 @@ public class MyArrayList<E> implements List<E> {
     @Override
     public boolean add(E e) {
         if (size()  == arr.length) {
-            final int multiplier = arr.length > DEFAULT_CAPACITY ? arr.length : DEFAULT_CAPACITY;
-            final Object[] newArr = new Object[2*multiplier];
+            final Object[] newArr = new Object[2*arr.length + 1];
             for (int i = 0; i < size(); i++) {
                 newArr[i] = arr[i];
             }
