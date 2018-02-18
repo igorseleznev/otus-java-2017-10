@@ -53,6 +53,7 @@ public class MyArrayList<E> implements List<E> {
         return Arrays.copyOf(a, a.length);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public boolean add(E e) {
         if (size()  == arr.length) {
@@ -93,6 +94,7 @@ public class MyArrayList<E> implements List<E> {
         return true;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public boolean addAll(Collection<? extends E> c) {
         boolean res = false;
@@ -129,6 +131,7 @@ public class MyArrayList<E> implements List<E> {
         arr = initArr();
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public E get(int index) {
         if (index < 0 || index >= size()) {
@@ -137,6 +140,7 @@ public class MyArrayList<E> implements List<E> {
         return (E)arr[index];
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public E set(int index, E element) {
         if (index < 0 || index >= size()) {
@@ -153,6 +157,7 @@ public class MyArrayList<E> implements List<E> {
         throw new UnsupportedOperationException();
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public E remove(int index) {
         if (index < 0 || index >= size()) {
@@ -182,6 +187,7 @@ public class MyArrayList<E> implements List<E> {
         throw new UnsupportedOperationException();
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public ListIterator<E> listIterator() {
         return new ListIterator<E>() {

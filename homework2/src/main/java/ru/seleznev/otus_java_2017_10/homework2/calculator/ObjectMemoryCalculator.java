@@ -25,6 +25,7 @@ class ObjectMemoryCalculator extends MemoryCalculatorBase {
     private final Class<Object> clazz;
     private final Supplier supplier;
 
+    @SuppressWarnings("unchecked") // to remove maven compile warning
     public ObjectMemoryCalculator(final Class clazz) {
         this.clazz = clazz;
         this.supplier = null;

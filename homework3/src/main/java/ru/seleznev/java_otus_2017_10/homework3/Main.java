@@ -6,6 +6,8 @@ import java.util.Collections;
 import java.util.List;
 
 public class Main {
+
+    @SuppressWarnings("unchecked")
     public static void main(String[] args) {
         List<Number> list = new MyArrayList<>();
         System.out.println("Empty list: " + list);
